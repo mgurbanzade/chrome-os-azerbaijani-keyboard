@@ -26,7 +26,7 @@ var lut = {
 "BracketLeft": { "plain": {"plain": "ö", "shifted": "Ö"}, "alternate": {"plain": "[", "shifted":"{"}, "code": "BracketLeft"},
 "BracketRight": { "plain": {"plain": "ğ", "shifted": "Ğ"}, "alternate": {"plain": "]", "shifted":"}"}, "code": "BracketRight"},
 "Semicolon": { "plain": {"plain": "ı", "shifted": "I"}, "alternate": {"plain": "", "shifted":""}, "code": "Semicolon"},
-"Quote": { "plain": {"plain": "ə", "shifted": "Ə"}, "alternate": {"plain": "'", "shifted":"\""}, "code": "Quote"},
+"Quote": { "plain": {"plain": "ə", "shifted": "Ə"}, "alternate": {"plain": "\"", "shifted":"'"}, "code": "Quote"},
 "Comma": { "plain": {"plain": "ç", "shifted": "Ç"}, "alternate": {"plain": "", "shifted":""}, "code": "Comma"},
 "Period": { "plain": {"plain": "ş", "shifted": "Ş"}, "alternate": {"plain": "", "shifted":""}, "code": "Period"},
 "Slash": { "plain": {"plain": ".", "shifted": ","}, "alternate": {"plain": "", "shifted":""}, "code": "Slash"},
