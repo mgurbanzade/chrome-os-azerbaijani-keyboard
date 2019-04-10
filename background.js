@@ -26,12 +26,12 @@ var lut = {
 "BracketLeft": { "plain": {"plain": "ö", "shifted": "Ö"}, "alternate": {"plain": "[", "shifted":"{"}, "code": "BracketLeft"},
 "BracketRight": { "plain": {"plain": "ğ", "shifted": "Ğ"}, "alternate": {"plain": "]", "shifted":"}"}, "code": "BracketRight"},
 "Semicolon": { "plain": {"plain": "ı", "shifted": "I"}, "alternate": {"plain": "", "shifted":""}, "code": "Semicolon"},
-"Quote": { "plain": {"plain": "ə", "shifted": "Ə"}, "alternate": {"plain": "", "shifted":""}, "code": "Quote"},
+"Quote": { "plain": {"plain": "ə", "shifted": "Ə"}, "alternate": {"plain": "'", "shifted":"\""}, "code": "Quote"},
 "Comma": { "plain": {"plain": "ç", "shifted": "Ç"}, "alternate": {"plain": "", "shifted":""}, "code": "Comma"},
 "Period": { "plain": {"plain": "ş", "shifted": "Ş"}, "alternate": {"plain": "", "shifted":""}, "code": "Period"},
 "Slash": { "plain": {"plain": ".", "shifted": ","}, "alternate": {"plain": "", "shifted":""}, "code": "Slash"},
 };
-    
+
 
 chrome.input.ime.onFocus.addListener(function(context) {
   contextID = context.contextID;
@@ -43,7 +43,7 @@ function updateAltGrState(keyData) {
 }
 
 function updateShiftState(keyData) {
-  shiftState = ((keyData.shiftKey && !(keyData.capsLock)) || (!(keyData.shiftKey) && keyData.capsLock)) ? 
+  shiftState = ((keyData.shiftKey && !(keyData.capsLock)) || (!(keyData.shiftKey) && keyData.capsLock)) ?
                  Shift.SHIFTED : Shift.PLAIN;
 }
 
@@ -57,14 +57,14 @@ function isRemappedEvent(keyData) {
          (lastRemappedKeyEvent.key == keyData.key &&
           lastRemappedKeyEvent.code == keyData.code &&
           lastRemappedKeyEvent.type == keyData.type
-         ); // requestID would be different so we are not checking for it  
+         ); // requestID would be different so we are not checking for it
 }
 
 
 chrome.input.ime.onKeyEvent.addListener(
     function(engineID, keyData) {
       var handled = false;
-      
+
       if (isRemappedEvent(keyData)) {
         lastRemappedKeyEvent = undefined;
         return handled;
@@ -72,12 +72,12 @@ chrome.input.ime.onKeyEvent.addListener(
 
       updateAltGrState(keyData);
       updateShiftState(keyData);
-                
+
       if (lut[keyData.code]) {
           var remappedKeyData = keyData;
           remappedKeyData.key = lut[keyData.code][altGrState][shiftState];
           remappedKeyData.code = lut[keyData.code].code;
-        
+
         if (chrome.input.ime.sendKeyEvents != undefined) {
           chrome.input.ime.sendKeyEvents({"contextID": contextID, "keyData": [remappedKeyData]});
           handled = true;
@@ -87,6 +87,6 @@ chrome.input.ime.onKeyEvent.addListener(
           handled = true;
         }
       }
-      
+
       return handled;
 });
